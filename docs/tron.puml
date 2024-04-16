@@ -1,0 +1,29 @@
+@startuml
+class Juego
+class Jugador
+class Ia 
+class Moto 
+class Tron 
+class Arena 
+class Oponente
+class Muro 
+class Jet 
+class Estela 
+class Colisionable
+
+
+Moto o-- Arena
+Tron o-- Moto
+Jugador o-- Tron
+Oponente o-- Moto
+Ia o-- Oponente
+Moto o-- Estela
+Muro --* Arena
+Arena *-- Jet
+
+Moto --|> Colisionable
+Muro--|> Colisionable
+Estela --|> Colisionable
+Jet --|> Colisionable
+
+@enduml
