@@ -4,28 +4,42 @@
 #include <thread>
 #include <string>
 #include <fstream>
+#include <Dibujo.hpp>
 
 using namespace std;
 using namespace ftxui;
 
 int main (int argc, char const *argv[])
 {
-
-fstream archivo;
+/*ifstream archivo;
 archivo.open("./assets/images/moto.txt");
-string moto;
-while (archivo.good())
+archivo.open("./assets/images/bloque.txt");
+string linea;
+string block;
+Elements elementos;
+Elements elementos2;
+while (getline(archivo,linea))
 {
-    archivo>>moto;    
+    elementos.emplace_back(text(linea));   
+
 }
-archivo.close();
+while (getline(archivo,block))
+{
+    elementos2.emplace_back(text(block));   
+
+}
+Element moto=vbox(elementos);
+Element bloque=vbox(elementos2);
+archivo.close(); */
+
+Dibujo moto("./assets/images/moto.txt");
+Dibujo bloque("./assets/images/bloque.txt");
 int fotograma=0;
 while(true){
     this_thread::sleep_for(0.1s);
     fotograma++;
-    Element personaje = spinner (21,fotograma)| bold | color(Color::Magenta3) | bgcolor(Color::Black);
-    Element eMoto = text(moto);
-    Element dibujo = hbox({personaje, eMoto});
+    Element personaje = spinner (21,fotograma)| bold | color(Color::Magenta3) | bgcolor(Color::RedLight);
+    Element dibujo = hbox({personaje, moto.GetElement(), bloque.GetElement()});
     Screen pantalla= Screen::Create(Dimension::Full());
     Render(pantalla,dibujo);
     pantalla.Print();
