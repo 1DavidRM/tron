@@ -1,5 +1,19 @@
-bin/tron : src/main.cpp
-	g++ -o bin/tron src/main.cpp -Iinclude -lftxui-screen -lftxui-dom -lftxui-component -std=c++2a
+output = bin
+source = src
+include= -Iinclude
+dependencias= -lftxui-screen -lftxui-dom -lftxui-component
+flags= -std=c++2a $(dependencias) $(include)
 
-run : bin/tron
-	./bin/tron
+
+run : $(output)/tron
+	./$<
+
+$(source)/tron : $(source)/main.cpp
+	g++ -o $@ $<(source)/main.cpp $(flags)
+
+runPantalla : $(output)/pantalla
+	./$<
+
+
+$(output)/pantalla : $(source)/pantalla.cpp
+	g++ -o $@ $< $(flags)
